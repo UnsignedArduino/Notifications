@@ -1,7 +1,7 @@
 namespace SpriteKind {
     export const Notification = SpriteKind.create()
 }
-//% color="#6FFFFA"
+//% color="#0000cc" icon="\uf075"
 namespace Notification {
     /**
      * Display some text with an optional icon at the top of the screen. 
