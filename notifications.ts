@@ -32,6 +32,7 @@ namespace Notification {
             .
         `, SpriteKind.Notification);
         notification.setFlag(SpriteFlag.Ghost, true);
+        notification.setFlag(SpriteFlag.RelativeToCamera, true)
         function clearBubble() {
             bubble.fill(1);
         }
