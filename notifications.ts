@@ -3,6 +3,7 @@ namespace SpriteKind {
 }
 //% color="#0000cc" icon="\uf075"
 namespace Notification {
+    let notification: Sprite = null
     /**
      * Display some text with an optional icon at the top of the screen. 
      * @param rawText: A string of text to display.
@@ -28,7 +29,7 @@ namespace Notification {
         if (icon && icon.width == 8 && icon.height == 8) {
             hasIcon = true;
         }
-        let notification = sprites.create(img`
+        notification = sprites.create(img`
             .
         `, SpriteKind.Notification);
         notification.setFlag(SpriteFlag.Ghost, true);
@@ -98,5 +99,12 @@ namespace Notification {
             pause(50);
         }
         notification.destroy();
+    }
+    /**
+     * Returns whether we are displaying a notification or not. 
+     */
+    //% block="Showing notification"
+    export function isNotifying() {
+        return !(spriteutils.isDestroyed(notification))
     }
 }
