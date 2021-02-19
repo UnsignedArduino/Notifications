@@ -107,4 +107,13 @@ namespace Notification {
     export function isNotifying() {
         return !(spriteutils.isDestroyed(notification))
     }
+    /**
+     * Blocks until no notifications are displaying; returns immediately if no notification is displaying.
+     */
+    //% block="Wait for notification to finish"
+    export function waitForNotificationFinish() {
+        while (Notification.isNotifying()) {
+            pause(100)
+        }
+    }
 }
