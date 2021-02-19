@@ -13,6 +13,7 @@ namespace Notification {
     //% rawText.defl="Notification!"
     //% icon.shadow=screen_image_picker
     //% expandableArgumentMode="toggle"
+    //% weight=100
     export function notify(rawText: string, icon?: Image) {
         // Replace newlines with spaces
         const text = console.inspect(rawText).split("\n").join(" ");
@@ -104,6 +105,7 @@ namespace Notification {
      * Returns whether we are displaying a notification or not. 
      */
     //% block="Showing notification"
+    //% weight=80
     export function isNotifying() {
         return !(spriteutils.isDestroyed(notification))
     }
@@ -111,6 +113,7 @@ namespace Notification {
      * Blocks until no notifications are displaying; returns immediately if no notification is displaying.
      */
     //% block="Wait for notification to finish"
+    //% weight=90
     export function waitForNotificationFinish() {
         while (Notification.isNotifying()) {
             pause(100)
