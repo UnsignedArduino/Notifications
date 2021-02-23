@@ -7,13 +7,14 @@ namespace Notification {
     /**
      * Display some text with an optional icon at the top of the screen. 
      * @param rawText: A string of text to display.
+     * @param speed: The speed multiplier for how fast the notification shows.
      * @param icon: A 8x8 image as the icon. If the dimensions do not fit, no icon will be displayed.
      */
     //% block="Notify with text $rawText || at speed $speed || with icon $icon"
     //% rawText.defl="Notification!"
     //% speed.defl=1
     //% icon.shadow=screen_image_picker
-    //% expandableArgumentMode="toggle"
+    //% expandableArgumentMode="enabeled"
     //% weight=100
     export function notify(rawText: string, speed: number = 1, icon?: Image) {
         // Replace newlines with spaces
