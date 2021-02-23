@@ -16,7 +16,7 @@ namespace Notification {
     //% icon.shadow=screen_image_picker
     //% expandableArgumentMode="enabeled"
     //% weight=100
-    export function notify(rawText: string, speed: number = 1, icon?: Image) {
+    export function notify(rawText: string, speed?: number, icon?: Image) {
         // Replace newlines with spaces
         const text = console.inspect(rawText).split("\n").join(" ");
         let font = image.getFontForText(text);
@@ -24,7 +24,10 @@ namespace Notification {
         let holdTime = 1000; // ms
         let textTime = ((text.length * font.charWidth) / 40) * 1000;
         let textOffset = 0;
-        let textTimeMultiplier = speed;
+         let textTimeMultiplier = 1;
+        if (speed) {
+            textTimeMultiplier = speed;
+        }
         let imageWidth = 156;
         let textLength = Math.max(text.length * font.charWidth, 24 * font.charWidth);
         let imageHeight = font.charHeight + padding;
