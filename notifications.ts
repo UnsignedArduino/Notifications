@@ -10,7 +10,7 @@ namespace Notification {
      * @param speed: The speed multiplier for how fast the notification shows.
      * @param icon: A 8x8 image as the icon. If the dimensions do not fit, no icon will be displayed.
      */
-    //% block="Notify with text $rawText || at speed $speed || with icon $icon"
+    //% block="Notify with text $rawText || at speed $speed | with icon $icon"
     //% rawText.defl="Notification!"
     //% speed.defl=1
     //% icon.shadow=screen_image_picker
