@@ -9,12 +9,13 @@ namespace Notification {
      * @param rawText: A string of text to display.
      * @param icon: A 8x8 image as the icon. If the dimensions do not fit, no icon will be displayed.
      */
-    //% block="Notify with text $rawText || with icon $icon"
+    //% block="Notify with text $rawText || at speed $speed || with icon $icon"
     //% rawText.defl="Notification!"
+    //% speed.defl=1
     //% icon.shadow=screen_image_picker
     //% expandableArgumentMode="toggle"
     //% weight=100
-    export function notify(rawText: string, icon?: Image) {
+    export function notify(rawText: string, speed: number = 1, icon?: Image) {
         // Replace newlines with spaces
         const text = console.inspect(rawText).split("\n").join(" ");
         let font = image.getFontForText(text);
@@ -22,6 +23,7 @@ namespace Notification {
         let holdTime = 1000; // ms
         let textTime = ((text.length * font.charWidth) / 40) * 1000;
         let textOffset = 0;
+        let textTimeMultiplier = speed;
         let imageWidth = 156;
         let textLength = Math.max(text.length * font.charWidth, 24 * font.charWidth);
         let imageHeight = font.charHeight + padding;
@@ -74,26 +76,23 @@ namespace Notification {
             notification.top += 1;
             pause(50);
         }
-        let startTime = game.runtime();
-        let displaying = true;
-        let totalLength = 0;
-        while (game.runtime() - startTime < holdTime + textTime) {
+        let totalLength;
+        pause(holdTime / textTimeMultiplier)
+        for (let i = 0; i < Math.abs(text.length * font.charWidth); i++) {
+            totalLength = Math.abs(text.length * font.charWidth) + (padding * 2) + textOffset;
             if (hasIcon) {
-                totalLength = Math.abs(text.length * font.charWidth) + (padding * 2) + textOffset + 10;
-            } else {
-                totalLength = Math.abs(text.length * font.charWidth) + (padding * 2) + textOffset;
+                totalLength += 10;
             }
-            if (game.runtime() - startTime > holdTime && text.length > 24 && totalLength > imageWidth) {
+            if (text.length > 24 && totalLength > imageWidth) {
                 clearBubble();
                 printToBubble(text, padding + textOffset);
                 padBubble();
                 roundBubbleEdges();
                 textOffset -= 1;
-                pause(25);
-            } else {
-                pause(100);
             }
+            pause(textTime / Math.abs(text.length * font.charWidth) / textTimeMultiplier)
         }
+        pause(holdTime / textTimeMultiplier)
         notification.top = 2;
         while (notification.bottom > -2) {
             notification.bottom -= 1;
