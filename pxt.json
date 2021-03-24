@@ -3,7 +3,7 @@
     "description": "",
     "dependencies": {
         "device": "*",
-        "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.1.0"
+        "arcade-sprite-util": "github:jwunderl/arcade-sprite-util"
     },
     "files": [
         "main.ts",
