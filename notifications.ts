@@ -1,9 +1,10 @@
 namespace SpriteKind {
-    export const Notification = SpriteKind.create()
+    export const Notification = SpriteKind.create();
 }
+
 //% color="#0000cc" icon="\uf075"
 namespace Notification {
-    let notification: Sprite = null
+    let notification: Sprite = null;
     /**
      * Display some text with an optional icon at the top of the screen. 
      * @param rawText: A string of text to display.
@@ -24,14 +25,14 @@ namespace Notification {
         let holdTime = 1000; // ms
         let textTime = ((text.length * font.charWidth) / 40) * 1000;
         let textOffset = 0;
-         let textTimeMultiplier = 1;
+        let textTimeMultiplier = 1;
         if (speed) {
             textTimeMultiplier = speed;
         }
         let imageWidth = 156;
         let textLength = Math.max(text.length * font.charWidth, 24 * font.charWidth);
         let imageHeight = font.charHeight + padding;
-        let bubble = image.create(imageWidth, imageHeight)
+        let bubble = image.create(imageWidth, imageHeight);
         let hasIcon = false;
         if (icon && icon.width == 8 && icon.height == 8) {
             hasIcon = true;
@@ -40,13 +41,13 @@ namespace Notification {
             .
         `, SpriteKind.Notification);
         notification.setFlag(SpriteFlag.Ghost, true);
-        notification.setFlag(SpriteFlag.RelativeToCamera, true)
+        notification.setFlag(SpriteFlag.RelativeToCamera, true);
         function clearBubble() {
             bubble.fill(1);
         }
         function printToBubble(str: string, x: number) {
             if (hasIcon) {
-                bubble.print(str, x+10, 2, 15, font);;
+                bubble.print(str, x+10, 2, 15, font);
             } else {
                 bubble.print(str, x, 2, 15, font);
             }
@@ -55,7 +56,7 @@ namespace Notification {
             // Left padding
             if (hasIcon) {
                 bubble.fillRect(0, 0, padding+10, imageHeight, 1);
-                spriteutils.drawTransparentImage(icon, bubble, padding-1, 2)
+                spriteutils.drawTransparentImage(icon, bubble, padding-1, 2);
             } else {
                 bubble.fillRect(0, 0, padding, imageHeight, 1);
             }
@@ -81,7 +82,7 @@ namespace Notification {
             pause(50);
         }
         let totalLength;
-        pause(holdTime / textTimeMultiplier)
+        pause(holdTime / textTimeMultiplier);
         for (let i = 0; i < Math.abs(text.length * font.charWidth); i++) {
             totalLength = Math.abs(text.length * font.charWidth) + (padding * 2) + textOffset;
             if (hasIcon) {
@@ -94,9 +95,9 @@ namespace Notification {
                 roundBubbleEdges();
                 textOffset -= 1;
             }
-            pause(textTime / Math.abs(text.length * font.charWidth) / textTimeMultiplier)
+            pause(textTime / Math.abs(text.length * font.charWidth) / textTimeMultiplier);
         }
-        pause(holdTime / textTimeMultiplier)
+        pause(holdTime / textTimeMultiplier);
         notification.top = 2;
         while (notification.bottom > -2) {
             notification.bottom -= 1;
@@ -104,13 +105,14 @@ namespace Notification {
         }
         notification.destroy();
     }
+
     /**
      * Returns whether we are displaying a notification or not. 
      */
     //% block="Showing notification"
     //% weight=80
-    export function isNotifying() {
-        return !(spriteutils.isDestroyed(notification))
+    export function isNotifying(): boolean {
+        return !(spriteutils.isDestroyed(notification));
     }
     /**
      * Blocks until no notifications are displaying; returns immediately if no notification is displaying.
@@ -119,7 +121,7 @@ namespace Notification {
     //% weight=90
     export function waitForNotificationFinish() {
         while (Notification.isNotifying()) {
-            pause(100)
+            pause(0);
         }
     }
 }
