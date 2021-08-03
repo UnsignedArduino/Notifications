@@ -133,6 +133,9 @@ namespace Notification {
     //% block="Cancel the current notification"
     //% weight=90
     export function cancelNotification() {
+        if (!isNotifying()) {
+            return;
+        }
         while (notification.bottom > -2) {
             notification.bottom -= 1;
             pause(50);
