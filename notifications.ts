@@ -110,18 +110,33 @@ namespace Notification {
      * Returns whether we are displaying a notification or not. 
      */
     //% block="Showing notification"
-    //% weight=80
+    //% weight=70
     export function isNotifying(): boolean {
         return !(spriteutils.isDestroyed(notification));
     }
+
     /**
      * Blocks until no notifications are displaying; returns immediately if no notification is displaying.
      */
     //% block="Wait for notification to finish"
-    //% weight=90
+    //% weight=80
     export function waitForNotificationFinish() {
         while (Notification.isNotifying()) {
             pause(0);
         }
+    }
+
+    /**
+     * Cancels the current notification. 
+     * (Technically, the last notification cause we only keep a pointer to the last one)
+     */
+    //% block="Cancel the current notification"
+    //% weight=90
+    export function cancelNotification() {
+        while (notification.bottom > -2) {
+            notification.bottom -= 1;
+            pause(50);
+        }
+        notification.destroy();
     }
 }
