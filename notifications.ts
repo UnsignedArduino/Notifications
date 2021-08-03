@@ -147,7 +147,7 @@ namespace Notification {
         }
         while (notification.bottom > -2) {
             notification.bottom -= 1;
-            pause(0);
+            pause(50);
         }
         notification.destroy();
     }
