@@ -77,13 +77,12 @@ namespace Notification {
         roundBubbleEdges();
         notification.setImage(bubble);
         notification.left = 2;
-        notification.bottom = -2;
         notification.z = 100000000000;
         moving_notification = true;
-        while (notification.top < 2) {
-            notification.top += 1;
+        for (notification.bottom = -2; notification.top < 2; notification.top++) {
             pause(50);
         }
+        notification.top = 2;
         moving_notification = false;
         let totalLength;
         pause(holdTime / textTimeMultiplier);
@@ -103,11 +102,10 @@ namespace Notification {
         }
         pause(holdTime / textTimeMultiplier);
         moving_notification = true;
-        notification.top = 2;
-        while (notification.bottom > -2) {
-            notification.bottom -= 1;
+        for (notification.top = 2; notification.bottom > -2; notification.bottom--) {
             pause(50);
         }
+        notification.bottom = -2;
         moving_notification = false;
         notification.destroy();
     }
@@ -145,10 +143,14 @@ namespace Notification {
         while (moving_notification) {
             pause(0);
         }
-        while (notification.bottom > -2) {
-            notification.bottom -= 1;
+        pause(50);
+        for ( ; notification.bottom > -2; notification.bottom--) {
+            while (moving_notification) {
+                pause(0);
+            }
             pause(50);
         }
+        notification.bottom = -2;
         notification.destroy();
     }
 }
